@@ -18,7 +18,7 @@ class SQLMetaInfo(BaseModel):
     needs_refinement: bool = False
     refinement_steps: List[str] = []
     
-    _execution_result: List[Any] = PrivateAttr(default=[])
+    _execution_result: List[Any] = PrivateAttr(default_factory=Any)
     _execution_status: ExecutionStatus = PrivateAttr(default=None)
 
     

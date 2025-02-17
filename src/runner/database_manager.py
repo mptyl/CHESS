@@ -1,4 +1,5 @@
 import os
+import sys
 import socket
 import pickle
 from threading import Lock
@@ -8,15 +9,21 @@ from langchain_chroma import Chroma
 from typing import Callable, Dict, List, Any
 import time
 
-from database_utils.schema import DatabaseSchema
-from database_utils.schema_generator import DatabaseSchemaGenerator
-from database_utils.execution import execute_sql, compare_sqls, validate_sql_query, aggregate_sqls, get_execution_status, subprocess_sql_executor
-from database_utils.db_info import get_db_all_tables, get_table_all_columns, get_db_schema
-from database_utils.sql_parser import get_sql_tables, get_sql_columns_dict, get_sql_condition_literals
-from database_utils.db_values.search import query_lsh
-from database_utils.db_catalog.search import query_vector_db
-from database_utils.db_catalog.preprocess import EMBEDDING_FUNCTION
-from database_utils.db_catalog.csv_utils import load_tables_description
+
+
+
+# Add the directory containing database_utils to the Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.database_utils.schema import DatabaseSchema
+from src.database_utils.schema_generator import DatabaseSchemaGenerator
+from src.database_utils.execution import execute_sql, compare_sqls, validate_sql_query, aggregate_sqls, get_execution_status, subprocess_sql_executor
+from src.database_utils.db_info import get_db_all_tables, get_table_all_columns, get_db_schema
+from src.database_utils.sql_parser import get_sql_tables, get_sql_columns_dict, get_sql_condition_literals
+from src.database_utils.db_values.search import query_lsh
+from src.database_utils.db_catalog.search import query_vector_db
+from src.database_utils.db_catalog.preprocess import EMBEDDING_FUNCTION
+from src.database_utils.db_catalog.csv_utils import load_tables_description
 
 load_dotenv(override=True)
 DB_ROOT_PATH = Path(os.getenv("DB_ROOT_PATH"))
@@ -234,7 +241,7 @@ class DatabaseManager:
             tentative_schema (Dict[str, List[str]]): The tentative schema.
 
         Returns:
-            Dict[str, List[str]]: The updated schema with connections.
+            Dict[str, List[str]]: The updated schema with connections.F
         """
         schema_generator = DatabaseSchemaGenerator(
             tentative_schema=DatabaseSchema.from_schema_dict(tentative_schema),
@@ -324,3 +331,4 @@ def receive_data_in_chunks(conn, chunk_size=1024):
                 chunks.append(chunk)
                 bytes_received += len(chunk)
             return pickle.loads(b''.join(chunks))
+

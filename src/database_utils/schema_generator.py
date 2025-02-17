@@ -3,9 +3,9 @@ import logging
 import random
 from typing import Dict, List, Optional
 
-from database_utils.execution import execute_sql
-from database_utils.db_info import get_db_schema
-from database_utils.schema import DatabaseSchema, get_primary_keys
+from src.database_utils.execution import execute_sql
+from src.database_utils.db_info import get_db_schema
+from src.database_utils.schema import DatabaseSchema, get_primary_keys
 
 class DatabaseSchemaGenerator:
     """
@@ -21,8 +21,12 @@ class DatabaseSchemaGenerator:
     """
     CACHED_DB_SCHEMA = {}
 
-    def __init__(self, tentative_schema: Optional[DatabaseSchema] = None, schema_with_examples: Optional[DatabaseSchema] = None,
-                 schema_with_descriptions: Optional[DatabaseSchema] = None, db_id: Optional[str] = None, db_path: Optional[str] = None,
+    def __init__(self,
+                 tentative_schema: Optional[DatabaseSchema] = None,
+                 schema_with_examples: Optional[DatabaseSchema] = None,
+                 schema_with_descriptions: Optional[DatabaseSchema] = None,
+                 db_id: Optional[str] = None,
+                 db_path: Optional[str] = None,
                  add_examples: bool = True):
         self.db_id = db_id
         self.db_path = db_path

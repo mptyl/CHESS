@@ -43,7 +43,8 @@ Database admin instructions (voliating any of the following will result is punis
 13. **Date Processing:**
     - Utilize `STRFTIME()` for date manipulation (e.g., `STRFTIME('%Y', SOMETIME)` to extract the year).
 
-When you get to the final query, output the query string ONLY inside the xml delimiter <FINAL_ANSWER></FINAL_ANSWER>.
+When you get to the final query, output the query string. Never output anything else, included comments or
+When generating SQL queries, you must meticulously verify that each column reference is paired with its correct table alias (e.g., T1, T2, etc.). For every single column you include in the query: 1. Double-check that the column actually exists in the table indicated by the alias prefix 2. Verify you haven't accidentally assigned it to the wrong table 3. If in doubt about which table owns a particular column, explicitly state your uncertainty rather than making assumptions For example, if you write T1.customer_name, you must be completely certain that the customer_name column belongs to the table given alias T1, not T2 or any other table in the query. Treat this validation as a mandatory step - incorrect table-column relationships will cause query failures and potentially wrong results. Any time you're not 100% confident about a column's table ownership, flag it for verification.
 
 Here are some examples
 
@@ -71,12 +72,13 @@ CREATE TABLE location
 Question: 
 How many Thai restaurants can be found in San Pablo Ave, Albany? 
 
-Evidence:
+[Evidence]:
 Thai restaurant refers to food_type = 'thai'; San Pablo Ave Albany refers to street_name = 'san pablo ave' AND T1.city = 'albany'
 
 
 **************************
 【Answer】
+
 Repeating the question and evidence, and generating the SQL with Recursive Divide-and-Conquer.
 **Question**: How many Thai restaurants can be found in San Pablo Ave, Albany? 
 **Evidence**: Thai restaurant refers to food_type = 'thai'; San Pablo Ave Albany refers to street_name = 'san pablo ave' AND T1.city = 'albany'
@@ -112,9 +114,9 @@ Repeating the question and evidence, and generating the SQL with Recursive Divid
 
 **Final Optimized SQL Query:**
 
-<FINAL_ANSWER>
+ANSWER:
 SELECT COUNT(T1.id_restaurant) FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.food_type = 'thai' AND T1.city = 'albany' AND T2.street_name = 'san pablo ave'
-</FINAL_ANSWER> 
+
 
 ===========
 Example 1

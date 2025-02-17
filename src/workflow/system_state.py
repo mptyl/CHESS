@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 from typing import List, Dict, Any
 
-from runner.task import Task
-from runner.database_manager import DatabaseManager
-from workflow.sql_meta_info import SQLMetaInfo
+from src.runner.task import Task
+from src.runner.database_manager import DatabaseManager
+from src.workflow.sql_meta_info import SQLMetaInfo
 
 import re
 

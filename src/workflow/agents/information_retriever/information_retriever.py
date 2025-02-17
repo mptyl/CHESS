@@ -1,9 +1,9 @@
-from workflow.agents.agent import Agent
-from workflow.system_state import SystemState
+from src. workflow.agents.agent import Agent
+from src.workflow.system_state import SystemState
 
-from workflow.agents.information_retriever.tool_kit.extract_keywords import ExtractKeywords
-from workflow.agents.information_retriever.tool_kit.retrieve_entity import RetrieveEntity
-from workflow.agents.information_retriever.tool_kit.retrieve_context import RetrieveContext
+from src.workflow.agents.information_retriever.tool_kit.extract_keywords import ExtractKeywords
+from src.workflow.agents.information_retriever.tool_kit.retrieve_entity import RetrieveEntity
+from src. workflow.agents.information_retriever.tool_kit.retrieve_context import RetrieveContext
 
 
 class InformationRetriever(Agent):

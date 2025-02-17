@@ -1,4 +1,4 @@
-# CHESS: Contextual Harnessing for Efficient SQL Synthesis
+x# CHESS: Contextual Harnessing for Efficient SQL Synthesis
 
 This repository contains the code and data for the paper "CHESS: Contextual Harnessing for Efficient SQL Synthesis."
 

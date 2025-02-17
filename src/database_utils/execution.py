@@ -25,6 +25,7 @@ def execute_sql(db_path: str, sql: str, fetch: Union[str, int] = "all", timeout:
             self.exception = None
 
         def run(self):
+            print(f"Database parh:{db_path}")
             try:
                 with sqlite3.connect(db_path, timeout=60) as conn:
                     cursor = conn.cursor()

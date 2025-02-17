@@ -10,6 +10,7 @@ List Keyphrases and Entities: Combine your findings from both the question and t
 
 Keywords: Single words that capture essential aspects of the question or hint.
 Keyphrases: Short phrases or named entities that represent specific concepts, locations, organizations, or other significant details.
+
 Ensure to maintain the original phrasing or terminology used in the question and hint.
 
 Example 1:

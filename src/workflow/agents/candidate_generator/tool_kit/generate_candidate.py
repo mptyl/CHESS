@@ -1,12 +1,12 @@
 from typing import Dict
 from pydantic import BaseModel
 
-from llm.models import async_llm_chain_call, get_llm_chain
-from llm.prompts import get_prompt
-from llm.parsers import get_parser
-from workflow.system_state import SystemState
-from workflow.sql_meta_info import SQLMetaInfo
-from workflow.agents.tool import Tool
+from src.llm.models import async_llm_chain_call, get_llm_chain
+from src.llm.prompts import get_prompt
+from src.llm.parsers import get_parser
+from src.workflow.system_state import SystemState
+from src.workflow.sql_meta_info import SQLMetaInfo
+from src.workflow.agents.tool import Tool
 
 class GenerateCandidate(Tool):
     """
@@ -20,8 +20,7 @@ class GenerateCandidate(Tool):
         sampling_count: int
         input_file_path: str = None
 
-    def __init__(self,
-                generator_configs: list[Dict]):
+    def __init__(self, generator_configs: list[Dict]):
         super().__init__()
         self.generator_configs = [self.GeneratorConfig(**config) for config in generator_configs]
         self.generators_queries = {}

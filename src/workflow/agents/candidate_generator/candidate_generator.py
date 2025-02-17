@@ -1,8 +1,8 @@
-from workflow.agents.agent import Agent
-from workflow.system_state import SystemState
+from src.workflow.agents.agent import Agent
+from src.workflow.system_state import SystemState
 
-from workflow.agents.candidate_generator.tool_kit.generate_candidate import GenerateCandidate
-from workflow.agents.candidate_generator.tool_kit.revise import Revise
+from src.workflow.agents.candidate_generator.tool_kit.generate_candidate import GenerateCandidate
+from src.workflow.agents.candidate_generator.tool_kit.revise import Revise
 
 class CandidateGenerator(Agent):
     """

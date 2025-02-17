@@ -21,8 +21,8 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument('--num_workers', type=int, default=1, help="Number of workers to use.")
     parser.add_argument('--log_level', type=str, default='warning', help="Logging level.")
     parser.add_argument('--pick_final_sql', type=bool, default=False, help="Pick the final SQL from the generated SQLs.")
-    args = parser.parse_args()
 
+    args = parser.parse_args()
     args.run_start_time = datetime.now().isoformat()
     with open(args.config, 'r') as file:
         args.config=yaml.safe_load(file)

@@ -5,7 +5,7 @@ from tqdm import tqdm
 import logging
 from typing import Dict, List, Any, Tuple
 
-from database_utils.execution import execute_sql
+from src.database_utils.execution import execute_sql
 
 def _get_unique_values(db_path: str) -> Dict[str, Dict[str, List[str]]]:
     """
@@ -108,17 +108,31 @@ def skip_column(column_name: str, column_values: List[str]) -> bool:
 
 def make_lsh(unique_values: Dict[str, Dict[str, List[str]]], signature_size: int, n_gram: int, threshold: float, verbose: bool = True) -> Tuple[MinHashLSH, Dict[str, Tuple[MinHash, str, str, str]]]:
     """
-    Creates a MinHash LSH from unique values.
+    Creates a MinHash Locality-Sensitive Hashing (LSH) index from unique values in a database.
+
+    This function processes unique values from database tables and columns, creates MinHash
+    signatures for each value, and builds an LSH index for efficient similarity search.
 
     Args:
-        unique_values (Dict[str, Dict[str, List[str]]]): The dictionary of unique values.
-        signature_size (int): The size of the MinHash signature.
-        n_gram (int): The n-gram size for the MinHash.
-        threshold (float): The threshold for the MinHash LSH.
-        verbose (bool): Whether to display progress information.
+        unique_values (Dict[str, Dict[str, List[str]]]): A nested dictionary containing unique values
+            from the database. The structure is {table_name: {column_name: [values]}}.
+        signature_size (int): The number of permutations to use in the MinHash signatures.
+        n_gram (int): The size of n-grams to use when creating MinHash signatures.
+        threshold (float): The similarity threshold for the LSH index. Values closer to 1 require
+            higher similarity for matches.
+        verbose (bool, optional): If True, displays a progress bar during processing. Defaults to True.
 
     Returns:
-        Tuple[MinHashLSH, Dict[str, Tuple[MinHash, str, str, str]]]: The MinHash LSH object and the dictionary of MinHashes.
+        Tuple[MinHashLSH, Dict[str, Tuple[MinHash, str, str, str]]]: A tuple containing:
+            - MinHashLSH: The constructed LSH index.
+            - Dict[str, Tuple[MinHash, str, str, str]]: A dictionary mapping unique keys to tuples
+              containing (MinHash object, table name, column name, original value).
+
+    Raises:
+        Exception: If an error occurs during LSH creation, it's logged but not raised.
+
+    Note:
+        This function uses the datasketch library for MinHash and LSH operations.
     """
     lsh = MinHashLSH(threshold=threshold, num_perm=signature_size)
     minhashes: Dict[str, Tuple[MinHash, str, str, str]] = {}

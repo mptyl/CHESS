@@ -2,14 +2,14 @@ import logging
 from typing import Dict, Any
 
 from langgraph.graph import END, StateGraph
-from workflow.system_state import SystemState
+from src.workflow.system_state import SystemState
 
-from workflow.agents.information_retriever.information_retriever import InformationRetriever
-from workflow.agents.schema_selector.schema_selector import SchemaSelector
-from workflow.agents.candidate_generator.candidate_generator import CandidateGenerator
-from workflow.agents.unit_tester.unit_tester import UnitTester
+from src.workflow.agents.information_retriever.information_retriever import InformationRetriever
+from src.workflow.agents.schema_selector.schema_selector import SchemaSelector
+from src.workflow.agents.candidate_generator.candidate_generator import CandidateGenerator
+from src.workflow.agents.unit_tester.unit_tester import UnitTester
 
-from workflow.agents.evaluation import ExecutionAccuracy
+from src.workflow.agents.evaluation import ExecutionAccuracy
 
 AGENT_CLASSES = {
     "information_retriever": InformationRetriever,

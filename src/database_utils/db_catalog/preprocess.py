@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 from langchain_chroma import Chroma
 from langchain.schema.document import Document
 from langchain_openai import OpenAIEmbeddings
-from langchain_google_vertexai import VertexAIEmbeddings
-from google.oauth2 import service_account
-from google.cloud import aiplatform
-import vertexai
+#from langchain_google_vertexai import VertexAIEmbeddings
+#from google.oauth2 import service_account
+#from google.cloud import aiplatform
+#import vertexai
 
 from database_utils.db_catalog.csv_utils import load_tables_description
 

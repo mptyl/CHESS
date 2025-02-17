@@ -20,9 +20,9 @@ if GCP_CREDENTIALS and GCP_PROJECT and GCP_REGION:
     )
     vertexai.init(project=GCP_PROJECT, location=GCP_REGION, credentials=service_account.Credentials.from_service_account_file(GCP_CREDENTIALS))
 
-from runner.database_manager import DatabaseManager
-from workflow.system_state import SystemState
-from workflow.agents.tool import Tool
+from src.runner.database_manager import DatabaseManager
+from src.workflow.system_state import SystemState
+from src.workflow.agents.tool import Tool
 
 class RetrieveEntity(Tool):
     """
@@ -196,9 +196,9 @@ class RetrieveEntity(Tool):
         Returns:
             Dict[str, Dict[str, List[str]]]: A dictionary mapping table and column names to similar entities.
         """
-        to_seartch_values = self._get_to_search_values(keywords)
-        similar_entities_via_LSH = self._get_similar_entities_via_LSH(to_seartch_values)
-        similar_entities_via_edit_distance = self._get_similar_entities_via_edit_distance(similar_entities_via_LSH)
+        to_search_values = self._get_to_search_values(keywords)
+        similar_entities_via_LSH = self._get_similar_entities_via_LSH(to_search_values)
+        similar_entities_via_edit_distance = self._get_simtilar_entities_via_edit_distance(similar_entities_via_LSH)
         similar_entities_via_embedding = self._get_similar_entities_via_embedding(similar_entities_via_edit_distance)
         
         selected_values = {}

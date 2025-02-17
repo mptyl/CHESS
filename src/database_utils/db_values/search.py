@@ -4,7 +4,7 @@ from pathlib import Path
 import logging
 from typing import Dict, Tuple, List
 
-from database_utils.db_values.preprocess import _create_minhash
+from src.database_utils.db_values.preprocess import _create_minhash
 
 ### Database value similarity ###
 

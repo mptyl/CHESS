@@ -1,12 +1,12 @@
 import logging
 from typing import Dict, List, Any
 
-from llm.models import async_llm_chain_call, get_llm_chain
-from llm.prompts import get_prompt
-from llm.parsers import get_parser
-from workflow.system_state import SystemState
-from workflow.agents.tool import Tool
-from runner.database_manager import DatabaseManager
+from src.llm.models import async_llm_chain_call, get_llm_chain
+from src.llm.prompts import get_prompt
+from src.llm.parsers import get_parser
+from src.workflow.system_state import SystemState
+from src.workflow.agents.tool import Tool
+from src.runner.database_manager import DatabaseManager
 
 class SelectColumns(Tool):
     """
@@ -61,7 +61,6 @@ class SelectColumns(Tool):
             raise ValueError(f"Unknown mode for column selection: {self.mode}")
         
         state.tentative_schema = self.selected_columns.copy()
-
     def union_schemas(self, schemas):
         schema_union = {}
         for schema in schemas:
@@ -108,7 +107,7 @@ class SelectColumns(Tool):
                             valid_column_dict = True
             if valid_column_dict:
                 chain_of_thoughts.append(dict_cot)
-        
+
         aggregated_chain_of_thoughts = "\n----\n".join(chain_of_thoughts)
         aggregation_result = columns
         aggregation_result["chain_of_thought_reasoning"] = aggregated_chain_of_thoughts
